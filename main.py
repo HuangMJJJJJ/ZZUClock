@@ -5,6 +5,7 @@ import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 os.environ["webdriver.chrome.driver"] = '/usr/bin/chromedriver'
 option = webdriver.ChromeOptions()
@@ -12,7 +13,8 @@ option.add_argument('--headless')  # 启用无头模式
 option.add_argument('--incognito')  # 启用无痕模式
 pref = {"profile.default_content_setting_values.geolocation": 2}
 option.add_experimental_option("prefs", pref)  # 禁用地理位置
-serv = Service("/usr/bin/chromedriver")
+# serv = Service("/usr/bin/chromedriver")
+serv = Service(ChromeDriverManager().install())
 
 err = 0
 account = os.environ.get('ACCOUNT').split(';')  # 字符串预处理
